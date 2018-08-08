@@ -51,7 +51,47 @@
         <hr>
 
         <h3>Generally speaking, you rely more on your experience than your imagination.</h2>
-        <div id="question2">
+        
+        <label id="question2">><input type="radio" name="q1" value="c1">
+          1 (strongly disagree)
+        
+     <input type="radio" name="q1" value="c2">
+          2
+       <br />
+        <input type="radio" name="q1" value="c3">
+          3
+      <br />
+        <input type="radio" name="q1" value="c4">
+          4
+       <br />
+        <input type="radio" name="q1" value="c4">
+          5 (strongly agree)
+      <br />
+          </label>
+        <hr>
+        <div id="question3">
+        <h3>You find it easy to stay relaxed and focused even when there is some pressure.</h2>
+        <label><input type="radio" name="q1" value="c1">
+          1 (strongly disagree)
+        </label><br />
+        <label><input type="radio" name="q1" value="c2">
+          2
+        </label><br />
+        <label><input type="radio" name="q1" value="c3">
+          3
+        </label><br />
+        <label><input type="radio" name="q1" value="c4">
+          4
+        </label><br />
+        <label><input type="radio" name="q1" value="c4">
+          5 (strongly agree)
+        </label><br />
+      </div>
+    
+        <hr>
+
+        <h3>You rarely do something just out of sheer curiosity.</h2>
+          <div id="question4">
         <label><input type="radio" name="q1" value="c1">
           1 (strongly disagree)
         </label><br />
@@ -70,44 +110,8 @@
         </div>
         <hr>
 
-        <h3>You find it easy to stay relaxed and focused even when there is some pressure.</h2>
-        <label><input type="radio" name="q1" value="c1">
-          1 (strongly disagree)
-        </label><br />
-        <label><input type="radio" name="q1" value="c2">
-          2
-        </label><br />
-        <label><input type="radio" name="q1" value="c3">
-          3
-        </label><br />
-        <label><input type="radio" name="q1" value="c4">
-          4
-        </label><br />
-        <label><input type="radio" name="q1" value="c4">
-          5 (strongly agree)
-        </label><br />
-    
-        <hr>
-
-        <h3>You rarely do something just out of sheer curiosity.</h2>
-        <label><input type="radio" name="q1" value="c1">
-          1 (strongly disagree)
-        </label><br />
-        <label><input type="radio" name="q1" value="c2">
-          2
-        </label><br />
-        <label><input type="radio" name="q1" value="c3">
-          3
-        </label><br />
-        <label><input type="radio" name="q1" value="c4">
-          4
-        </label><br />
-        <label><input type="radio" name="q1" value="c4">
-          5 (strongly agree)
-        </label><br />
-        <hr>
-
         <h3>People can rarely upset you.</h2>
+          <div id="question5">
         <label><input type="radio" name="q1" value="c1">
           1 (strongly disagree)
         </label><br />
@@ -123,9 +127,11 @@
         <label><input type="radio" name="q1" value="c4">
           5 (strongly agree)
         </label><br />
+        </div>
         <hr>
 
         <h3>It is often difficult for you to relate to other people’s feelings.</h2>
+          <div id="question6">
         <label><input type="radio" name="q1" value="c1">
           1 (strongly disagree)
         </label><br />
@@ -141,9 +147,11 @@
         <label><input type="radio" name="q1" value="c4">
           5 (strongly agree)
         </label><br />
+        </div>
         <hr>
 
         <h3>In a discussion, truth should be more important than people’s sensitivities.</h2>
+          <div id="question7">
         <label><input type="radio" name="q1" value="c1">
           1 (strongly disagree)
         </label><br />
@@ -159,9 +167,11 @@
         <label><input type="radio" name="q1" value="c4">
           5 (strongly agree)
         </label><br />
+        </div>
         <hr>
 
         <h3>You rarely get carried away by fantasies and ideas.</h2>
+          <div id="question8">
         <label><input type="radio" name="q1" value="c1">
           1 (strongly disagree)
         </label><br />
@@ -177,9 +187,11 @@
         <label><input type="radio" name="q1" value="c4">
           5 (strongly agree)
         </label><br />
+        </div>
         <hr>
 
         <h3>You think that everyone’s views should be respected regardless of whether they are supported by facts or not.</h2>
+          <div id="question9">
         <label><input type="radio" name="q1" value="c1">
           1 (strongly disagree)
         </label><br />
@@ -195,9 +207,11 @@
         <label><input type="radio" name="q1" value="c4">
           5 (strongly agree)
         </label><br />
+        </div>
         <hr>
 
         <h3>You feel more energetic after spending time with a group of people.</h2>
+          <div id="question10">
         <label><input type="radio" name="q1" value="c1">
           1 (strongly disagree)
         </label><br />
@@ -213,6 +227,7 @@
         <label><input type="radio" name="q1" value="c4">
           5 (strongly agree)
         </label><br />
+        </div>
     
     
        
@@ -246,9 +261,6 @@ $('#submit').on('click', function(event) {
 			event.preventDefault();
  
     
-
-    
-
    var userData = {
     name: $("#name").val(),
     photo: $("#photo").val(),
@@ -266,11 +278,15 @@ $('#submit').on('click', function(event) {
     ]
   };  
   console.log('userData = ' + JSON.stringify(userData));
-
-
-  
-  
 })
+
+$.post(currentURL + "/api/friends", userData, function(data) {
+        // Grab the result from the AJAX post so that the best match's name and photo are displayed.
+        $("#matchName").text(data.name);
+        $('#matchImg').attr("src", data.photo);
+        // Show the modal with the best match 
+        $("#resultsModal").modal('toggle');
+      });
   </script>
 
    
